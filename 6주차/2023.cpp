@@ -37,7 +37,7 @@ int main()
 };
 
 /*소수 판별*/
-int sosu_check(int num)
+int sosu_check(int num) /*number 제곱근 사용*/
 {
     int i;
     for (i = 2; i < num; i++)
