@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <stack>
 using namespace std;
 
 /*
@@ -22,6 +23,9 @@ c+d=f
 
 
 void cmp(vector<int> arr);
+bool comp(int a,int b){
+    return a > b;
+}
 
 int main(){
 
@@ -40,37 +44,38 @@ int main(){
 };
 
 void cmp(vector<int> arr){
-    queue<int> q;
+    priority_queue<int,vector<int>,greater<int>> pq;
     vector<int> nv;
     int cur, next, temp;
-    long long sum = 0;
+    int sum = 0;
 
-    sort(arr.begin(), arr.end());
+    //sort(arr.begin(), arr.end(),comp);
 
     int size = arr.size();
 
     // queue insert
     for (int i = 0; i < size;i++){
-        q.push(arr[i]);
+        pq.push(arr[i]);
     };
 
-    // 
-    while(!q.empty()){
+    // queue research
+    while(!pq.empty()){
         while(1){
-            cur = q.front();
-            q.pop();
-            next = q.front();
-            q.pop();
+            cur = pq.top();
+            pq.pop();
+            next = pq.top();
+            pq.pop();
             temp = cur + next;
             nv.push_back(temp);
-            if(q.size()==0){
+            if(pq.size()==0){
                 break;
             };
-            q.push(temp);
+            pq.push(temp);
         };
     };
 
     for (int i = 0; i < nv.size();i++){
+        //cout << nv[i] << endl;
         sum += nv[i];
     };
 
@@ -79,9 +84,12 @@ void cmp(vector<int> arr){
 
 
 /*
+따로 정리하기..
 
-제출 시 오류가 나는데 왜 나는지 이해가 안감
+key point
+- priority queue 사용
+1.최초 정렬
+2.새로운 연산의 결과도 정렬 시킨 후 계산하기
 
-
-
+근데 런타임 에러남 ..
 */
