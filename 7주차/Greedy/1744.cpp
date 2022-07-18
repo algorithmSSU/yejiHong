@@ -5,15 +5,17 @@
 
 using namespace std;
 
-void solution(queue<int> q);
-bool negative(queue<int> q);
-bool zero_chek(queue<int> q);
-bool abs_check(queue<int> q,int x);
-int main(){
+void solution(priority_queue<int> q);
 
-    int n;
+int negative(priority_queue<int> q);
+
+/*아직 다 못함..*/
+
+
+int n;
+int main(){
     vector<int> v;
-    queue<int> q;
+    priority_queue<int> q;
 
     cin >> n;
 
@@ -29,59 +31,43 @@ int main(){
     for (int i = 0; i < v.size();i++){
         q.push(v[i]);
     };
+
+    solution(q);
 };
-bool negative(queue<int> q){
-    int cur;
+
+int negative(priority_queue<int> q){
+    int temp;
+    int count;
     while(!q.empty()){
-        cur = q.front();
-        q.pop();
-        if(cur<0){
-            return true;
+        temp = q.top();
+        if(temp<0){
+            count++;
+            q.pop();
+        }else{
+            q.pop();
         };
     };
-    return false;
+
+    return count;
 };
 
-bool zero_check(queue<int> q){
-    int cur;
-    while(!q.empty()){
-        cur = q.front();
-        q.pop();
-        if(cur==0){
-            return true;
+
+
+void solution(priority_queue<int> q){
+    int count = negative(q);
+    int result = 0;
+    if(count%2==0){//음수가 짝수 일 때.
+        for (int i = 0;i<n/2;i++){
+            int a = q.top();
+            q.pop();
+            int b = q.top();
+            q.pop();
+            result += a * b;
         };
     };
+
+    if(count%2!=0){ //음수가 홀수 일 때.
+        
+    };
+    cout << result << endl;
 };
-
-bool abs_check(queue<int> q,int x){
-    int cur;
-    while(!q.empty()){
-        cur = q.front();
-        q.pop();
-        if(abs(cur)==abs(x)){
-            return true;
-        };
-    };
-    return false;
-};
-
-
-/*음수 체크, 0 체크, 절대값 체크*/
-
-void solution(queue<int> q){
-    int cur;
-    if(negative(q)){ // 음수가 있을 때
-        if(zero_check(q)){ // 0이 있을 때  
-            
-
-        }else if(!zero_check(q)){ // 0이 없을 때
-
-        }
-
-
-    };
-    if(!negative(q)){
-
-
-    };
-}

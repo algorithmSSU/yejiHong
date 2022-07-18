@@ -61,12 +61,14 @@ void cmp(vector<int> arr){
     // queue research
     while(!pq.empty()){
         while(1){
-            cur = pq.top();
-            pq.pop();
-            next = pq.top();
-            pq.pop();
-            temp = cur + next;
-            nv.push_back(temp);
+            if(pq.size()>=2){
+                cur = pq.top();
+                pq.pop();
+                next = pq.top();
+                pq.pop();
+                temp = cur + next;
+                nv.push_back(temp);
+            };
             if(pq.size()==0){
                 break;
             };
@@ -75,7 +77,6 @@ void cmp(vector<int> arr){
     };
 
     for (int i = 0; i < nv.size();i++){
-        //cout << nv[i] << endl;
         sum += nv[i];
     };
 
@@ -91,5 +92,5 @@ key point
 1.최초 정렬
 2.새로운 연산의 결과도 정렬 시킨 후 계산하기
 
-근데 런타임 에러남 ..
+반례모두 확인했음..하지만 결과는 틀렸습니다임 왜지..
 */

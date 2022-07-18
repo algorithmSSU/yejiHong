@@ -19,7 +19,7 @@ int main(){
     {
         int a, b;
         cin >> a >> b;
-        pq.push(make_pair(a, b));
+        pq.push(make_pair(b, a)); // second,first 순서로 저장
     };
 
 
@@ -27,7 +27,7 @@ int main(){
         int front = pq.top().first;
         int second = pq.top().second;
         st.push(make_pair(front, second));
-        cout << pq.top().first << pq.top().second << endl;
+        //cout << pq.top().first << pq.top().second << endl;
         pq.pop();
     };
 
@@ -41,7 +41,8 @@ int main(){
     ;
 
     unique(s.begin(), s.end());
-
+    sort(s.begin(), s.end());
+/*
     cout << "=====vector====" << endl;
     // priority queue를 통해 오름차순으로 정렬된 stack
     
@@ -49,64 +50,22 @@ int main(){
         cout << s[j].first << s[j].second << endl;
     };
 
-    cout << "====process====" << endl;
+    cout << "====result====" << endl;
+
+    */
 
     conf(s);
     //conference(s);
 };
 
-void conference(vector<pair<int, int>> v)
-{
-    int size = v.size();
-    int start = 0;
-    int index = 0;
-    int min_value = 24;
-    int count = 1;
-
-    while(1){
-
-        if(start == v.size()-1){
-            break;
-        };
-        for (int i = start; i < v.size();i++){
-            int temp = v[i].second;
-            if(min_value>temp){
-                min_value = temp;
-                index = i;
-            };
-            if(min_value==temp){
-                continue;
-                count++;
-            }
-        };
-        for (int j = start; j <size;j++){
-            int temp = v[j].first;
-            if(min_value<temp){
-                //cout << j << endl;
-                start = j;
-                count++;
-                break;
-            }else if(min_value>temp && j==size-1){
-            
-                //continue;
-                start = 0;
-                v.erase(v.begin() + index);
-            }
-        };
-        min_value = 24;
-    };
-    cout << count;
-
-    //cout << "min_value: "<< min_value << endl;
-
-};
-
 void conf(vector<pair<int,int>> s){
     int count;
     int temp;
-    temp = s[0].second;
+    temp = 0; 
     for (int i = 0; i < s.size();i++){
         if(temp<=s[i].second){
+            //cout << "temp: " << temp << endl;
+            //cout << s[i].second << endl;
             temp = s[i].first;
             count++;
         }
