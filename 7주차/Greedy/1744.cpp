@@ -7,67 +7,59 @@ using namespace std;
 
 void solution(priority_queue<int> q);
 
-int negative(priority_queue<int> q);
-
-/*아직 다 못함..*/
-
-
 int n;
-int main(){
-    vector<int> v;
-    priority_queue<int> q;
+int result;
+vector<int> positive;
+vector<int> negative;
+int zero_count;
 
+int solution();
+
+int p_size, n_size, z_size;
+
+int main(){ 
+    
+    
     cin >> n;
 
     for (int i = 0; i < n;i++){
         int temp;
         cin >> temp;
-        v.push_back(temp);
-    };
-
-
-    sort(v.begin(), v.end());
-
-    for (int i = 0; i < v.size();i++){
-        q.push(v[i]);
-    };
-
-    solution(q);
-};
-
-int negative(priority_queue<int> q){
-    int temp;
-    int count;
-    while(!q.empty()){
-        temp = q.top();
-        if(temp<0){
-            count++;
-            q.pop();
+        if(temp>1){
+            positive.push_back(temp);
+        }else if(temp==1){
+            result += 1;
+        }else if(temp == 0){
+            zero_count += 1;
         }else{
-            q.pop();
-        };
+            negative.push_back(temp);
+        }
     };
 
-    return count;
+    cout << solution() << endl;
 };
 
+int solution(){
+    sort(positive.begin(), positive.end(), greater<int>());
+    sort(negative.begin(), negative.end(), less<int>());
 
+    for (int i = 0; i < positive.size()-(positive.size()%2);i+=2){
+        result += positive[i] * positive[i + 1];
+    };
 
-void solution(priority_queue<int> q){
-    int count = negative(q);
-    int result = 0;
-    if(count%2==0){//음수가 짝수 일 때.
-        for (int i = 0;i<n/2;i++){
-            int a = q.top();
-            q.pop();
-            int b = q.top();
-            q.pop();
-            result += a * b;
+    if(positive.size()%2==1){
+        result += positive.back();
+    };
+
+    for (int i = 0; i < negative.size() - (negative.size()%2);i+=2){
+        result += negative[i] * negative[i + 1];
+    };
+
+    if(negative.size()%2==1){
+        if(zero_count==0){
+            result += negative.back();
         };
     };
 
-    if(count%2!=0){ //음수가 홀수 일 때.
-        
-    };
-    cout << result << endl;
+    return result;
 };

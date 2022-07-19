@@ -46,7 +46,7 @@ int main(){
 void cmp(vector<int> arr){
     priority_queue<int,vector<int>,greater<int>> pq;
     vector<int> nv;
-    int cur, next, temp;
+    
     int sum = 0;
 
     //sort(arr.begin(), arr.end(),comp);
@@ -59,8 +59,15 @@ void cmp(vector<int> arr){
     };
 
     // queue research
-    while(!pq.empty()){
-        while(1){
+    
+        int cur, next, temp;
+        while(pq.size()!=1){
+            if(pq.size()==1){
+                cur = pq.top();
+                pq.pop();
+                nv.push_back(cur);
+                break;
+            }
             if(pq.size()>=2){
                 cur = pq.top();
                 pq.pop();
@@ -74,7 +81,6 @@ void cmp(vector<int> arr){
             };
             pq.push(temp);
         };
-    };
 
     for (int i = 0; i < nv.size();i++){
         sum += nv[i];
@@ -91,6 +97,7 @@ key point
 - priority queue 사용
 1.최초 정렬
 2.새로운 연산의 결과도 정렬 시킨 후 계산하기
+3.반례를 신경쓰자
 
 반례모두 확인했음..하지만 결과는 틀렸습니다임 왜지..
 */
