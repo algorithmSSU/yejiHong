@@ -1,3 +1,6 @@
+/*다시 이해하고 풀기..*/
+
+
 #include <iostream>
 
 using namespace std;
@@ -19,7 +22,7 @@ void text(int num,int line){
 
     string l = "";
     for(int i=0; i<line;i++){
-        l += "____";
+        l += "____"; //4 칸
     };
 
     if(num==0){ // 종료조건

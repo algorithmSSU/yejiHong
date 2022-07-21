@@ -9,7 +9,7 @@ int fibo(int n);
 int main()
 {
 
-    cout << fibo(11) << endl;
+    cout << fibo(4) << endl;
 };
 
 int fibo(int n)
