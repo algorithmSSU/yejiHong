@@ -41,7 +41,11 @@ int main()
     }
     cout << result << "\n";
 
-    return 0;
+    for (int i = 0; i < 10;i++){
+        cout << dp[3][i] << " ";
+    }
+
+        return 0;
 }
 
 
