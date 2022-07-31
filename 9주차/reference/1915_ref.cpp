@@ -10,24 +10,20 @@ using namespace std;
 int N, M;
 int MAP[MAX][MAX];
 
-int main()
-{
+int main(){
 
     cin >> N >> M;
 
     int ans = 0;
 
-    for (int i = 0; i < N; i++)
-    {
+    for (int i = 0; i < N;i++){
         string s;
         cin >> s;
         //문자열 길이만큼 돌면서 CHAR 을 배열에 저장
-        for (int j = 0; j < M; j++)
-        {
+        for (int j = 0; j < M;j++){
             MAP[i][j] = s[j] - '0';
             //만약 1이 등장하면 최소 크기는 1
-            if (MAP[i][j] == 1)
-            {
+            if(MAP[i][j]==1){
                 ans = 1;
             };
         };
@@ -41,12 +37,9 @@ int main()
     // 0 0 0
     // 1 0 0
 
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 1; j < M; j++)
-        {
-            if (MAP[i][j] == 1)
-            {
+    for (int i = 0; i < N;i++){
+        for (int j = 1; j < M;j++){
+            if(MAP[i][j]==1){
                 MAP[i][j] = min(min(MAP[i - 1][j - 1], MAP[i - 1][j]), MAP[i][j - 1]) + 1;
                 ans = max(MAP[i][j], ans);
             };
@@ -57,10 +50,8 @@ int main()
 
     cout << "\n";
 
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < M; j++)
-        {
+    for (int i = 0; i < N;i++){
+        for (int j = 0; j < M;j++){
             cout << MAP[i][j];
         }
         cout << "\n";
