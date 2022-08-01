@@ -6,10 +6,8 @@ using namespace std;
 int n;
 int day[16];
 int reward[16];
-int validday[16];
 int dp[16];
 
-/*오열...*/
 
 int func();
 
