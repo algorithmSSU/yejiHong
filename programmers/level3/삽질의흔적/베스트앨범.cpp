@@ -12,25 +12,19 @@ vector<int> solution(vector<string> genres, vector<int> plays)
     map<string, vector<pair<int, int>>> summary;
     string maximum = "";
 
-
-
-    for (int i = 0; i < genres.size();i++){
-        m[genres[i]]+=plays[i];
-        summary[genres[i]].push_back(make_pair(plays[i],i));
-
+    for (int i = 0; i < genres.size(); i++)
+    {
+        m[genres[i]] += plays[i];
+        summary[genres[i]].push_back(make_pair(plays[i], i));
     };
 
-    for (int j = 0; m.size();j++){
-        
+    for (int j = 0; m.size(); j++)
+    {
     }
 
-        return answer;
+    return answer;
 };
-
 
 int main()
 {
-
-
-
 }
