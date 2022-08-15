@@ -75,11 +75,5 @@ min : 28
 
 
 return answer; (28).
-.
-
-avg : 34
-max : 29
-min : 29
-
 
 */
