@@ -46,9 +46,6 @@ long long solution(vector<long long> budget)
     while(min<=max){
         long long mid = (max + min) / 2;
 
-        //cout <<"max" << max << endl;
-        //cout << "min" <<  min << endl;
-
         long long check = 0;
         for (int i = 0;i<budget.size();i++){
             if(budget[i]>mid){
@@ -64,11 +61,9 @@ long long solution(vector<long long> budget)
         };
         if(check>total){
             max = mid-1;
-            //ans = mid;
         }else{
             min = mid + 1;
             ans = mid;
-            //cout << "ans:" << ans << endl;
         };
     };
     
