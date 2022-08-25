@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define MAX 1000
+#define MAX 50001
 vector<int> graph[MAX];      // 연결 그래프
 int parent[MAX];             // 각 노드별 부모를 담을 배열
 int depth[MAX];              // 각 노드별 깊이 담을 배열
@@ -15,23 +15,23 @@ void dfs(int s, int d);
 int LCA(int node_a, int node_b);
 
 /*각 노드별 부모와 깊이를 계산해주자*/
-void dfs(int start, int dep)
+void dfs(int mom, int dep)
 {
-    visited[start] = true;
-    depth[start] = dep;
-    for (int i = 0; i < graph[start].size(); i++)
+    visited[mom] = true;
+    depth[mom] = dep;
+    for (int i = 0; i < graph[mom].size(); i++)
     {
-        int next = graph[start][i];
+        int next = graph[mom][i];
         if (visited[next])
         {
             continue;
         }
-        parent[next] = start;
+        parent[next] = mom;
         dfs(next, dep + 1);
     }
 };
 
-// LCA 함수 부분이 이해가 잘 안됨;
+// LCA 함수 부분 이해 완, 재귀적인 사고가 필요,,
 
 /*깊이를 맞춰서 최소 공통 조상을 찾자*/
 int LCA(int node_a, int node_b)
@@ -43,7 +43,7 @@ int LCA(int node_a, int node_b)
         return node_a;
     };
 
-    // 깊이가 같으면 노드끼리 비교할 수 있음?..
+    // 깊이가 같은 경우 현재 노드의 부모를 비교,
     if (depth[node_a] == depth[node_b])
     {
         return LCA(parent[node_a], parent[node_b]);
