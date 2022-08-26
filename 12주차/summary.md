@@ -91,3 +91,9 @@
 1. **후위 순회**
 
 : 왼 → 오 → 중간
+
+
+
+
+> 세그먼트트리
+공부할때참고 : https://katfun.tistory.com/entry/%EC%84%B8%EA%B7%B8%EB%A8%BC%ED%8A%B8-%ED%8A%B8%EB%A6%AC
