@@ -86,7 +86,7 @@ index = 2 : 0 (부모가 index 0)
 index = 3 : 1 (부모가 index 1)
 index = 4 : 1 (부모가 index 1)
 
-삭제하려는 노드가 1일 때 index 1, value가 1 이 같이 제거됨
+솔루션 핵심 -> 삭제하려는 노드가 1일 때 index 1, value가 1 이 같이 제거됨
 
 
 
