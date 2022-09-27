@@ -19,7 +19,7 @@ int main(){
     cin >> N >> M;
 
 
-// 공간 초기화?
+    // 공간 초기화?
     v.assign(N + 1, vector<int>(0, 0)); // 아 이중벡터니까
     praise.assign(N + 1, 0); // N+1 사이즈만큼, 0으로 초기화
 

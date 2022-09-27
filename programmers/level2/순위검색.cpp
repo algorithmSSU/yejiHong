@@ -1,5 +1,8 @@
 // https://school.programmers.co.kr/learn/courses/30/lessons/72412
 
+
+//테스트케이스만 성공, 제출 오류..
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -21,19 +24,7 @@ vector<string> query = {
     "- and - and - and chicken 100",
     "- and - and - and - 150"};
 
-struct personal
-{
 
-    string dev;
-    string pos;
-    string career;
-    string soulfood;
-    string grade;
-    personal(string d, string p, string c, string s, string g) : dev(d), pos(p), career(c), soulfood(s), grade(g){};
-};
-
-vector<personal> Information;
-vector<string> str_info;
 vector<pair<string, int>> infor;
 vector<pair<string, int>> quer;
 
@@ -45,76 +36,95 @@ vector<int> solution(vector<string> info, vector<string> query)
         string temp;
         temp = info[i];
 
-        string grade = temp.substr(temp.length() - 3);
+        int tmp = temp.length() - 3;
+        string grade = temp.substr(tmp);
+        temp.resize(temp.size() - 3);
         int g = stoi(grade);
-        infor.emplace_back(temp, g);
 
-        /*
-            stringstream ss(temp);
-            string a, b, c, d, e;
-            ss >> a >> b >> c >> d >> e;
-            personal p(a, b, c, d, e);
-            Information.push_back(p);
-            */
+        //cout << "info: " << temp << endl;
+        infor.emplace_back(temp, g);
     }
 
     // sting,int 형식 제대로 들어갔는지 확인
     for (int i = 0; i < infor.size(); i++)
     {
-        cout << infor[i].first << infor[i].second << endl;
+       
     };
 
-    // query에서 한줄씩 읽으면서 info에 찾는 값이 있는지 체크
-    // 먼저 and랑 - 지우기
 
-    vector<string> query_temp;
+    vector<string> query_temp[10000];
     for (int j = 0; j < query.size(); j++)
     {
         string tmp;
         tmp = query[j];
 
-        tmp = regex_replace(tmp, regex("[ -]+"), "");
+        tmp = regex_replace(tmp, regex("[-]+"), "none");
         tmp = regex_replace(tmp, regex("and"), "");
 
-        string grade = tmp.substr(temp.length() - 3);
-        query_temp.push_back(tmp);
-    };
-
-    //아왜똑같은거두개;;
-
-    for (int j = 0; j < query_temp.size(); j++)
-    {
-        string temp = query_temp[j];
-        temp = regex_replace(temp, regex("[ ]+"), "");
-        string grade = temp.substr(temp.length() - 3);
+        int len = tmp.length() - 3;
+        string grade = tmp.substr(len);
         int g = stoi(grade);
-        temp.resize(temp.size() - 3);
-        quer.emplace_back(temp, g);
+
+        stringstream ss(tmp);
+
+        string a, b, c, d, e;
+        ss >> a >> b >> c >> d >> e;
+
+        query_temp[j].push_back(a);
+        query_temp[j].push_back(b);
+        query_temp[j].push_back(c);
+        query_temp[j].push_back(d);
+        query_temp[j].push_back(e);
+
     };
 
-    for (int i = 0; i < quer.size(); i++)
-    {
-        cout << "quer" << quer[i].first << quer[i].second << endl;
-    };
 
-    for (int r = 0; r < quer.size(); r++)
-    {
-        int c;
-        string tmp;
-        int tmpg;
-        tmp = quer[r].first;
-        tmpg = quer[r].second;
 
-        for (int x = 0; x < infor.size(); x++)
-        {
-            string text = infor[x].first;
-            if (tmp.find(text) != string::npos)
+
+    int count = 0;
+    int cnt_list[5] = {0, 0, 0, 0, 0}; // 크기 수정
+    for(int i=0;i<infor.size();i++){
+        string info = infor[i].first;
+        int grade = infor[i].second;
+        for (int k = 0; k < query.size();k++){
+            for (int j = 0; j < query_temp[i].size(); j++)
             {
-                c++;
-                answer.push_back(c);
+                if (query_temp[k][j] == "none")
+                {
+                    continue;
+                }
+                else
+                {
+                    if (j < 4)
+                    {
+                        if (info.find(query_temp[k][j]) == string::npos)
+                        {
+                            break;
+                        };
+                    }
+                    else if (j == 4)
+                    {
+                        int g = stoi(query_temp[k][j]);
+                        if (g <= grade)
+                        {
+                            cnt_list[k]++;
+                        }
+                        else
+                        {
+                            break;
+                        };
+                    };
+                };
             };
         }
-    }
+            
+    };
+
+    for (int i = 0; i < query.size();i++){
+        answer.emplace_back(cnt_list[i]);
+    };
+
+
     return answer;
 };
 
@@ -144,11 +154,7 @@ personal 구조체 타입으로 입력받고 Query에 넣음
 (-> and와 공백으로 분리가 관건)
 
 
-이제 Query 배열에 담긴 personal 구조체에서
-5개의 정보를 변수에 저장하고,
-Infromation 배열에서 personal 구조체에서 하나씩 값을 빼서
-첫번째 변수부터 일치하는지 확인
-만약 Query배열에 담긴 구조체에서 빼낸 변수값이 - 이면 다음 변수로 비교
+이제 Query 배열에 변수값이 - 이면 다음 변수로 비교
 -가 아닌 경우에서 일치하지않으면 바로 종료, 일치하면 그 다음 변수로 계속 확인
 
 
