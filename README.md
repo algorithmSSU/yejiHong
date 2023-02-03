@@ -20,8 +20,8 @@ ___
 
 
 ___
-# weekly Problem solve
+# Weekly Problem solving
 ___
 | 월/주차  | 분류 | 문제  | 풀이  | 풀이과정 및 메모  |
 |:---:|:---:|:------|:-----:|:-----:|
-| 2/1 | graph <br> graph <br> graph <br> graph <br> graph |[bj-14502](https://www.acmicpc.net/problem/14502) <br> [bj-7569](https://www.acmicpc.net/problem/7569) <br> [bj-2606](https://www.acmicpc.net/problem/2606) <br> [bj-2667](https://www.acmicpc.net/problem/2667) <br> [bj-11724](https://www.acmicpc.net/problem/11724)
+| 2/1 | graph <br> graph <br> graph <br> graph <br> graph |[bj-14502](https://www.acmicpc.net/problem/14502) <br> [bj-7569](https://www.acmicpc.net/problem/7569) <br> [bj-2606](https://www.acmicpc.net/problem/2606) <br> [bj-2667](https://www.acmicpc.net/problem/2667) <br> [bj-11724](https://www.acmicpc.net/problem/11724) | | c++ stl(queue,pair 사용법유의) |
