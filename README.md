@@ -1,7 +1,7 @@
 # yejiHong Algorithm Solution
 
 ___
-# Weekly Problem solving
+# 🌱Weekly Problem solving
 ___
 | 월/주차  | 분류 | 문제  | 풀이  | 풀이과정 및 메모  |
 |:---:|:---:|:------|:-----:|:-----:|
