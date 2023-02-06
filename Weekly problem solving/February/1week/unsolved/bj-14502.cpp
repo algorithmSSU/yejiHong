@@ -1,112 +1,115 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 #include <memory.h>
-
 using namespace std;
-int row, col;
 
 
-int map[8][8];
-int m[8][8];
-int record[8][8];
+const int cap=8;
+const int dx[4]={0,0,-1,1};
+const int dy[4]={-1,1,0,0};
 
-void bfs(int x,int y){
-    int temp[8][8];
-    copy(&map[0][0],&map[0][0]+64,&temp[0][0]);
-    int mx[4]={0,-1,0,1};
-    int my[4]={-1,0,1,0};
-    for(int i=0;i<4;i++){
-        int nx = x+mx[i];
-        int ny = y+my[i];
-        if(map[nx][ny]==0 && map[nx][ny]!=1){
-            map[nx][ny]=2;
-            bfs(nx,ny);
-        }
-    }
-};
+int row,col,a[cap][cap];
+int tmp[cap][cap];
+int ans=0;
+bool visited[cap][cap];
 
-
-
-int seek(int x,int y){
-    int answer =0;
-    int nx = x+1;
-    int ny = y+1;
-
-    int cnt =0;
-    for(int i=nx;i<=row;i++){
-        for(int j=ny;j<=col;j++){
-            if(!map[i][j]&& map[i][j]==0){
-                map[i][j]=1;
-                cnt++;
-            }
-            if(cnt==2){
-                break;
-            }
-        }
-    };
-    for(int i=1;i<=row;i++){
-        for(int j=1;j<=col;j++){
-            if(map[i][j]==2){
-                bfs(i,j);
-            };
-        };
-    };
-
-    for(int i=1;i<row;i++){
-        for(int j=1;j<col;j++){
-            if(map[i][j]==2){
-                answer++;
-            };
-        };
-    };
-    
-
-
-    return answer;
-};
-
-int main(){
-    cin.tie(0);
-    ios_base::sync_with_stdio(0);
-
-    cin >> row >> col;
-    row = row+1; // input size 보다 한칸크게
-    col =  col+1; // input size 보다 한칸크게
-    int total = row*col;
-
-    // fill map
-    for(int i=1;i<=row;i++){
-        for(int j=1;j<=col;j++){
-            cin >> map[i][j];
-        };
-    };
-
-    // fill m
-    for(int i=1;i<=row;i++){
-        for(int j=1;j<=col;j++){
-            m[i][j]= map[i][j];
-        };
-    };
-    
-   
-    // seek map
+void copy(int a[cap][cap],int b[cap][cap]){
     for(int i=0;i<row;i++){
         for(int j=0;j<col;j++){
-            
-            if(map[i][j]==0){
-                copy(&m[0][0],&m[0][0]+total,&map[0][0]);
-                memset(record,0,sizeof(int));
-                map[i][j]=1;
-                seek(i,j);
-                map[i][j]=0;
-                
+            a[i][j] = b[i][j];
+        }
+    }
+}
+// 바이러스 확산 시킨 후 안전지역 카운팅
+void bfs(){
+    int virus[8][8];
+    copy(virus,tmp);
+
+    queue< pair<int, int> > q;
+    for(int i=0;i<row;i++){
+        for(int j=0;j<col;j++){
+            if(virus[i][j]==2){
+                q.push(make_pair(i,j)); // 바이러스 위치 모두 담고
             }
-            
         }
     }
 
+    while(q.size()){// 바이러스 담은 곳 모두 방문
+        int y= q.front().first;
+        int x= q.front().second;
+
+        q.pop();
+
+        for(int k=0;k<4;k++){
+            int ny = y+dy[k];
+            int nx = x+dx[k];
+            
+            if(ny<0 || ny>=row || nx<0|| nx>=col){
+                continue;
+            }
+            if(virus[ny][nx]==0){ // 1:벽, 2:바이러스, 0:emprt place , 바이러스가 0공간까지 삼킴
+                virus[ny][nx]=2;
+                q.push(make_pair(ny,nx));
+            }
+        }
+    }
+
+
+    // 바이러스 확신 시키고 나서 안전지역 카운팅
+    int cnt =0;
+    for(int i=0;i<row;i++){
+        for(int j =0;j<col;j++){
+            if(virus[i][j]==0){
+                cnt++;
+            }
+        }
+    }
+    ans = max(ans,cnt);
 
 }
 
+// 벽 세우기
+void wall(int cur){ 
+    if(cur==3){
+        bfs();
+        return;
+    }
 
+    for(int i=0; i<row;i++){
+        for(int j =0;j<col;j++){
+            if(tmp[i][j]==0){
+                tmp[i][j]=1;
+                wall(cur+1);
+                tmp[i][j]=0;}
+        }
+    }
+}
+
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> row >> col;
+    for(int i=0;i<row;i++){
+        for(int j=0;j<col;j++){
+            cin >> a[i][j];
+        }
+    }
+
+    for(int i=0;i<row;i++){
+        for(int j=0;j<col;j++){
+            if(a[i][j]==0){
+                memset(visited,0,sizeof(visited));
+                copy(tmp,a);
+                tmp[i][j]=1;
+                wall(1);
+                tmp[i][j]=0;
+            };
+        };
+    
+    };
+    cout << ans;
+}
