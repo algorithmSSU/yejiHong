@@ -5,31 +5,11 @@ ___
 ___
 | 월/주차  | 분류 | 문제  | 풀이  | 풀이과정 및 메모  |
 |:---:|:---:|:------|:-----:|:-----:|
-| 2/1 | graph <br> graph <br> graph <br> graph <br> graph |[bj-14502](https://www.acmicpc.net/problem/14502) <br> [bj-7576](https://www.acmicpc.net/problem/7576) <br> [bj-2606](https://www.acmicpc.net/problem/2606) <br> [bj-2667](https://www.acmicpc.net/problem/2667) <br> [bj-11724](https://www.acmicpc.net/problem/11724) | [14502](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-14502.cpp) <br> [7576](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-7576.cpp) <br> [2606](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-2606.cpp) <br> [2667](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-2667.cpp) <br> [11724](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-11724.cpp)| c++ stl(queue,pair 사용법유의) |
-| 2/2 | graph <br> | [bj-1012](https://www.acmicpc.net/problem/1012) <br> [bj-1697](https://www.acmicpc.net/problem/1697) <br> [bj-10828](https://www.acmicpc.net/problem/10828)| [1012](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/2week/solved/bj-1012.cpp) <br> [1697]() <br> [10828]()| 
+| 2/1 | graph <br> graph <br> graph <br> graph <br> graph |[bj-14502](https://www.acmicpc.net/problem/14502) <br> [bj-7576](https://www.acmicpc.net/problem/7576) <br> [✓bj-2606](https://www.acmicpc.net/problem/2606) <br> [✓bj-2667](https://www.acmicpc.net/problem/2667) <br> [bj-11724](https://www.acmicpc.net/problem/11724) | [14502](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-14502.cpp) <br> [7576](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-7576.cpp) <br> [2606](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-2606.cpp) <br> [2667](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-2667.cpp) <br> [11724](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/1week/solved/bj-11724.cpp)| c++ stl(queue,pair 사용법유의) |
+| 2/2 | graph <br> graph <br> implementation <br> | [✓bj-1012](https://www.acmicpc.net/problem/1012) <br> [✓bj-1697](https://www.acmicpc.net/problem/1697) <br> [bj-10828](https://www.acmicpc.net/problem/10828)| [1012](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/2week/solved/bj-1012.cpp) <br> [1697]() <br> [10828](https://github.com/algorithmSSU/yejiHong/blob/main/Weekly%20problem%20solving/February/2week/solved/bj-10828.cpp)| 
 
 
-# Inflearn lecture
-
----
-
-실전모의고사 1회
-
-| 분류 | 문제 |
-| --- | --- |
-| dfs/bfs |  |
-| string |  |
-| stack |  |
-
-실전모의고사 2회
-
-| 분류 | 문제 |
-| --- | --- |
-| dfs/bfs |  |
-| string |  |
-| stack |  |
-
-BACKJOON Problems Solution
+# BACKJOON Problems Solution
 ___
 📝풀이 과정 및 스터디 내용 정리
 
