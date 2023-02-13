@@ -26,18 +26,19 @@ int bfs(){
         ox = q.front().second;
         q.pop();
         
-        for(int i=0; i<4;i++){
-            ny = oy+my[i];
-            nx = ox+mx[i];
-            if(ny<0 || ny>=w || nx<0 || nx>=h){
-                continue;
-            }
-            if(map[ny][nx]==1 && visited[ny][nx]==0){
-                visited[ny][nx]=1;
-                q.push(make_pair(ny,nx));
-            }
+    for(int i=0; i<4;i++){
+        ny = oy+my[i];
+        nx = ox+mx[i];
+        if(ny<0 || ny>=w || nx<0 || nx>=h){
+            continue;
+        }
+        if(map[ny][nx]==1 && visited[ny][nx]==0){
+            visited[ny][nx]=1;
+            q.push(make_pair(ny,nx));
         };
+
     };
+};
     
     return count;
 };
