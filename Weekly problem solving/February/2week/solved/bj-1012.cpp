@@ -18,8 +18,6 @@ int mx[4]={0,0,-1,1};
 
 int bfs(){
 
-    int count =1;
-
     while(!q.empty()){
         int oy,ox,ny,nx;
         oy = q.front().first;
@@ -40,7 +38,7 @@ int bfs(){
     };
 };
     
-    return count;
+    return 1;
 };
 
 

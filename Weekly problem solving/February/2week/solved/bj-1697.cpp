@@ -22,14 +22,12 @@ int solution(int n){
 
     while(!q.empty()){
         int cur = q.front().first;// 수빈이가 있는 위치
-        int answer = q.front().second;
+        int answer = q.front().second; // 연산횟수
         q.pop(); 
 
         if(cur==k){
             return answer;
         };
-        
-        vector<int> comp;
         
         int a,b,c;
         a = cur-1; // 현재 위치에서 -1
@@ -46,7 +44,7 @@ int solution(int n){
         if (b<= k && visited[b] == 0)
         {
             visited[b] = 1;
-            q.push(make_pair(b, answer + 1));
+            q.push(make_pair(b, answer+1));
         };
 
         // *2

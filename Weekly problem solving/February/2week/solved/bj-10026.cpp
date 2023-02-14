@@ -19,18 +19,18 @@ vector< pair<int, int> > G;
 int dy[4] = {-1, 1, 0, 0};
 int dx[4] = {0, 0, -1, 1};
 
-void dfs(int y, int x, char color)
+void bfs(int y, int x, char color)
 {
-    stack< pair<int, int> > s;
+    queue< pair<int, int> > q;
 
-    s.push(make_pair(y, x));
+    q.push(make_pair(y, x));
     visited[y][x] = 1;
 
-    while (!s.empty())
+    while (!q.empty())
     {
-        int cy = s.top().first;
-        int cx = s.top().second;
-        s.pop();
+        int cy = q.front().first;
+        int cx = q.front().second;
+        q.pop();
 
         for (int i = 0; i < 4; i++)
         {
@@ -44,17 +44,85 @@ void dfs(int y, int x, char color)
             if (map[ny][nx] == color && visited[ny][nx] == 0)
             {
                 visited[ny][nx] = 1;
-                s.push(make_pair(ny, nx));
+                q.push(make_pair(ny, nx));
             }
         }
     }
+};
+
+
+int normal(){
+    int count = 0;
+    vector<int> counting;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (map[i][j] == 'R' && visited[i][j] == 0)
+            {
+                bfs(i, j, 'R');
+                count++;
+            };
+            if (map[i][j] == 'G' && visited[i][j] == 0)
+            {
+                bfs(i, j, 'G');
+                count++;
+            }
+            if (map[i][j] == 'B' && visited[i][j] == 0)
+            {
+                bfs(i, j, 'B');
+                count++;
+            };
+        };
+    };
+
+    return count;
 }
+
+
+int weakness(int green_freq){
+
+    int count =0;
+
+    for (int i = 0; i < green_freq; i++)
+    {
+        map[G[i].first][G[i].second] = 'R';
+    };
+
+    for (int i = 0; i < n; i++)
+    {
+        memset(visited[i], 0, sizeof(int) * n);
+    };
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (map[i][j] == 'R' && visited[i][j] == 0)
+            {
+                bfs(i, j, 'R');
+                count++;
+            }
+            if (map[i][j] == 'B' && visited[i][j] == 0)
+            {
+                bfs(i, j, 'B');
+                count++;
+            };
+        };
+    };
+
+    return count;
+
+};
+
+
+
 int main()
 {
 
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-
+    int res1,res2 = 0;
     cin >> n;
 
     for (int i = 0; i < n; i++)
@@ -77,64 +145,18 @@ int main()
         };
     };
 
-    int count = 0;
-    vector<int> counting;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (map[i][j] == 'R' && visited[i][j] == 0)
-            {
-                dfs(i, j, 'R');
-                count++;
-            };
-            if (map[i][j] == 'G' && visited[i][j] == 0)
-            {
-                dfs(i, j, 'G');
-                count++;
-            }
-            if (map[i][j] == 'B' && visited[i][j] == 0)
-            {
-                dfs(i, j, 'B');
-                count++;
-            };
-        };
-    };
+    res1= normal();
+    res2= weakness(G.size());
+    
+    cout << res1 << " " << res2 << endl;
 
-    counting.push_back(count); // 적록색약 아닌 사람이 보는 갯수
-    cout << count << " ";
 
-    int gsize = G.size();
-    for (int i = 0; i < gsize; i++)
-    {
-        map[G[i].first][G[i].second] = 'R';
-    };
+    //=======이차원 배열 할당 해제==========
+    for(int i=0;i<n;i++){
+        delete[] map[i];
+    }
 
-    for (int i = 0; i < n; i++)
-    {
-        memset(visited[i], 0, sizeof(int) * n);
-    };
-
-    int wk = 0;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (map[i][j] == 'R' && visited[i][j] == 0)
-            {
-                dfs(i, j, 'R');
-                wk++;
-            }
-            if (map[i][j] == 'B' && visited[i][j] == 0)
-            {
-                dfs(i, j, 'B');
-                wk++;
-            };
-        };
-    };
-
-    counting.push_back(wk);
-    cout << wk << endl;
+    delete[] map;
 
     return 0;
 }
