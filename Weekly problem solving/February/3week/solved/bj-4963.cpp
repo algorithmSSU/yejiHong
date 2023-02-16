@@ -3,9 +3,6 @@
 #include <queue>
 #include <string.h>
 
-
-// 질문올려두었음 다시보기 
-
 using namespace std;
 
 #define SIZE 51
