@@ -11,7 +11,8 @@ using namespace std;
 #define SIZE 51
 int w, h;
 int map[SIZE][SIZE]={0,};
-int**visited = new int*[h];
+int visited[SIZE][SIZE] ={0,};
+//int**visited = new int*[h];
 int dy[8]={-1,1,0,0,-1,-1,1,1};// 대각선까지 고려
 int dx[8]={0,0,-1,1,-1,1,-1,1};// 대각선까지 고려
 
@@ -70,14 +71,17 @@ int main(){
         // map init
         for(int i=0;i<h;i++){
             memset(map[i],0,sizeof(int)*w);
+            memset(visited[i],0,sizeof(int)*w);
         };
 
         fill(w,h); // make map
 
         // visited init
+        /*
         for(int i=0;i<h;i++){
             visited[i] = new int[w];
         };
+        */
 
         // seek
         int c = 0;
@@ -89,7 +93,6 @@ int main(){
             }
         };
         ans.push_back(c);
-        
 
     }while(w!=0 && h!=0);
 
