@@ -1,6 +1,6 @@
 // 시간초과
 // 접근법 다시 생각해보기
-
+// https://www.acmicpc.net/board/view/27386
 
 #include <iostream>
 #include <vector>
