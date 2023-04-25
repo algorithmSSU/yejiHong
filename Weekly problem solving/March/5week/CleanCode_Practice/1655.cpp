@@ -1,62 +1,77 @@
-//#include <iostream>
-
-// 답변기다리기
+#include <iostream>
 #include <stdio.h>
 #include <vector>
 #include <queue>
 using namespace std;
 
 priority_queue<int, vector<int>, greater<int> > q; // 작은값부터 출력되게(상단에있게)
+priority_queue<int,vector<int>,greater<int> > sq;
+priority_queue<int,vector<int>,greater<int> > bq;
+priority_queue<int,vector<int>,less<int> > bsq;
 
 int main(){
 
     int n;
-    vector<int> v;
-    //cin >> n;
-    scanf("%d",&n);
+    cin >> n;
+    vector<int> ans;
     for(int i=0;i<n;i++){
         int temp;
-        //cin >> temp;
-        scanf("%d",&temp);
-        q.push(temp);
-        priority_queue<int, vector<int>, greater<int> > sq;
-        sq =q;
-        if(i<=1){
-            v.push_back(q.top());
+        int m;
+        cin >> temp;
+        if(q.empty()){
+            q.push(temp);
         }else{
-            if(q.size()>2 && q.size()%2==1){
-                // q size 가 2보다 크면
-                int p = q.size()/2;
-                //priority_queue<int, vector<int>, greater<int> > sq;
-                //sq= q;
-                for(int i=0;i<p;i++){
-                    sq.pop();
-                };
-                int mid;
-                mid = sq.top();
-                //cout << mid << endl;
-                v.push_back(mid);
-        
-            }else if(q.size()>2 && q.size()%2==0){
-                int p= q.size()/2-1;
-                //priority_queue<int, vector<int>, greater<int> > sq;
-                //sq = q;
-                for (int i = 0; i < p; i++)
-                {
-                    sq.pop();
-                };
-                int mid;
-                mid = sq.top();
-                // cout << mid << endl;
-                v.push_back(mid);
+            if(q.top()<temp){
+                bq.push(temp);
+            }else{
+                q.push(temp);
             }
         };
+        int len = q.size()+bq.size();
+
+        if(len==1){
+            m = 0;
+        }else{
+            m = len / 2 - 1;
+        }
+        cout << "m:"<< m << endl;
+        int qsize, bqsize = 0;
+        qsize = q.size(); bqsize = bq.size();
+        if(qsize==bqsize){
+            for(int i=0;i<m;i++){
+                q.push(q.top());
+                q.pop();
+            }
+            ans.push_back(q.top());
+            q.push(q.top());
+            q.pop();
+        }else if(qsize<bqsize){
+            for(int i=0;i<m;i++){
+                bq.push(bq.top());
+                bq.pop();
+            }
+            ans.push_back(bq.top());
+            bq.push(bq.top());
+            bq.pop();
+        }else if(qsize>bqsize){
+            for (int i = 0; i < m; i++)
+            {
+                q.push(q.top());
+                q.pop();
+            }
+            ans.push_back(q.top());
+            q.push(q.top());
+            q.pop();
+        }
     };
-        
-    for(int i=0;i<v.size();i++){
-        //cout << v[i] << "\n";
-        printf("%d\n",v[i]);
+
+
+    for(int i=0;i<ans.size();i++){
+        cout << ans[i] << endl;
     }
-    return 0;
+
+    
 
 }
+
+//마지막거 ㅏ하나만 이상
