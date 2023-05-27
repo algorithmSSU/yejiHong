@@ -1,38 +1,31 @@
-#include <iostream>
+#include <string>
 #include <vector>
-#include <string.h>
-#include <sstream>
+
 using namespace std;
 
-vector<int> change(string skip)
+bool is_skip(char c, string skip) // 스킵문자인지
 {
-    vector<int> ans;
-    for (int i = 0; i < skip.length(); i++)
-    {
-        int temp;
-        temp = skip[i];
-        ans.emplace_back(temp);
-    };
-    sort(ans.begin(), ans.end());
-    return ans;
+    for (int i = 0; i < skip.size(); i++)
+        if (c == skip[i])
+            return true;
+    return false;
 }
 
-
-//97~123 까지니 124
-int main(){
-    std::stringstream ss;
-
-    string input;
-    cin >> input;
-
-    vector<int> a;
-    a = change(input);
-
-    for(auto i : a){
-        cout << i << endl;
+string solution(string s, string skip, int index)
+{
+    string answer = "";
+    for (int i = 0; i < s.size(); i++)
+    {
+        char c = s[i];
+        for (int j = 0; j < index;)
+        {
+            c += 1;
+            if (c == 'z' + 1)
+                c = 'a';           // 'z'를 넘어가면 'a'로 바꿔준다.
+            if (!is_skip(c, skip)) // skip에 포함되지 않는 문자이면 카운트
+                j++;
+        }
+        answer.push_back(c);
     }
-
-    
-
-
+    return answer;
 }

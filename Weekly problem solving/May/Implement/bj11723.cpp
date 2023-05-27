@@ -4,7 +4,9 @@
 #include <set>
 using namespace std;
 
-#define size 1000
+
+// bitmasking 방법
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
@@ -12,9 +14,6 @@ int main(){
     int n;
     cin >> n;
 
-    set<int> s;
-
-    int r[size]={0,};
     int num = 0;
     int bitmask = 0;
     while(n--){
