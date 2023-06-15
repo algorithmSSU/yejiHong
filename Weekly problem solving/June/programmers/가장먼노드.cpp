@@ -73,4 +73,5 @@ int solution(int n, vector<vector<int> > edge)
 
 int main(){
 
-};
+    return 0;
+}
