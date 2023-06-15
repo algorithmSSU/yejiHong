@@ -37,4 +37,41 @@
 *.out
 *.app
 
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Raspberry Pi Pico Object file
+*.uf2
+# Raspberry Pi Pico disassembler file
+*.dis
+
 # End of https://www.toptal.com/developers/gitignore/api/c++
