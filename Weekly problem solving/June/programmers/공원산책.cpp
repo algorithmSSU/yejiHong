@@ -22,6 +22,8 @@ void make_map(vector<string> park)
     }
 }
 
+
+
 vector<pair<int, int>> mov;
 
 void make_routes(vector<string> routes)
