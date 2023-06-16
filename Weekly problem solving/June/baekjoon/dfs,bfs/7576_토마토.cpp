@@ -57,16 +57,7 @@ int main(){
       }
     };
 
-
     tom();
-
-    /*
-    for(int i=0;i<row;i++){
-        for(int j=0;j<col;j++){
-            std::cout << box[i][j] << " ";
-        };std::cout << '\n';
-    }
-    */
 
     int maxv = 0;
     for(int i=0;i<row;i++){
