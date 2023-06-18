@@ -27,14 +27,19 @@ vector<int> solution(vector<vector<int>> score)
     for(int i=0;i<avg.size();i++){
         std::cout << avg[i].first<< avg[i].second << endl;
     }
+
+    
     test.emplace_back(avg.back());
-    avg.pop_back();
+    //avg.pop_back();
     int startidx = 0;
     while (!avg.empty())
     {
         if (test[startidx].first == avg.back().first)
         {
+            int set = avg.back().second > test[startidx].second ? avg.back().second : test[startidx].second;
             avg.back().second = test[startidx].second;
+            test.pop_back();
+            test.emplace_back(avg.back());
             test.emplace_back(avg.back());
             
         }
