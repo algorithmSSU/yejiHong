@@ -13,7 +13,6 @@ int binarysearch(int low, int high, int target);
 
 int main()
 {
-
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
@@ -27,6 +26,7 @@ int main()
         nums.push_back(temp);
     };
 
+    // 이분탐색에서 정렬은 필수
     sort(nums.begin(), nums.end());
 
     int m;
