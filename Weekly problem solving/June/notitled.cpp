@@ -2,6 +2,8 @@
 #include <string.h>
 #include <algorithm>
 #include <string>
+#include <queue>
+#include <stack>
 using namespace std;
 
 int main(){
@@ -25,4 +27,21 @@ int main(){
     };
     remove(text.begin(),text.end(),' ');
     std::cout << text << endl;
+
+
+    vector<int> a;
+    vector<int>::iterator p;
+    a.push_back(1);
+    a.push_back(2);
+    a.push_back(3);
+
+    queue<int> q;
+    q.front();
+
+    stack<int> s;
+    //s.pop();
+
+    for(p=a.end();p!=a.begin();p--){
+        s.push(*p);
+    }
 }
