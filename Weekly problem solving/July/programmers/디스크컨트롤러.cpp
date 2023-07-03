@@ -21,9 +21,9 @@ int solution(vector<vector<int> > jobs) {
     };
 
     sort(v.begin(),v.end(),compare);
-    for(int i=0;i<v.size();i++){
-        cout << v[i].first << " " << v[i].second << endl;
-    }
+
+
+    
     return answer;
 } 
 
