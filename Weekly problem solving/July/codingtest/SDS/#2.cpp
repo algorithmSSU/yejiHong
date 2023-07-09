@@ -9,6 +9,7 @@ vector<string> make_list(string str)
 {
     vector<string> op;
     int len = str.length();
+    
 
     // 갯수별로 조합을 구하려면 이게 포인트
     // #include <algorithm>

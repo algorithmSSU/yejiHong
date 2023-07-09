@@ -32,11 +32,11 @@ int main(){
         }else{
             small=1;
         }
-        cout << big << " " << small << endl;
+        
         int save = big<=small ? small : big;
         ans = ans <= save ? save : ans;
     }
 
-    cout << ans << endl;
+    cout << ans << '\n';
 
 }
