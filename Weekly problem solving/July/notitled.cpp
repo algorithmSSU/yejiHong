@@ -1,47 +1,69 @@
 #include <iostream>
-#include <string.h>
-#include <algorithm>
-#include <string>
-#include <queue>
-#include <stack>
+#include <vector>
+#include <math.h>
+
+
 using namespace std;
 
-int main(){
-    string text;
-    text = "hello yeji hello hello holy helly what the hell";
 
-    int pos = 0;
+char map[101][101]={0,};
+int record[101][101]={0,};
+bool visited[101][101]={false,};
+int dy[4]={0,0,-1,1};
+int dx[4]={-1,1,0,0};
+int h,w;
 
-
-    string find_text = "hello";
-    int size = find_text.size();
-    while(1){
-        int idx = text.find(find_text,pos);
-        if(idx!=string::npos){
-            text.erase(idx,size);
-            std::cout << text << endl;
-            
-        }else{
-            break;
+int cnt=0;
+int dfs(int y,int x,char target){
+    visited[y][x]=true;
+    cnt++;
+    for(int i=0;i<4;i++){
+        int ny= y+dy[i];
+        int nx= x+dx[i];
+        if(ny>=0&& nx>=0 && ny<h && nx<w){
+            if(visited[ny][nx]==false && map[ny][nx]==target){
+                dfs(ny,nx,target);
+            }
         }
     };
-    remove(text.begin(),text.end(),' ');
-    std::cout << text << endl;
+    return cnt;
+}
 
+int main(){
+    cin >> w >> h;
 
-    vector<int> a;
-    vector<int>::iterator p;
-    a.push_back(1);
-    a.push_back(2);
-    a.push_back(3);
-
-    queue<int> q;
-    q.front();
-
-    stack<int> s;
-    //s.pop();
-
-    for(p=a.end();p!=a.begin();p--){
-        s.push(*p);
+    for(int i=0;i<h;i++){
+        string str;
+        cin >> str;
+        for(int j=0;j<str.length();j++){
+            map[i][j]=str[j];
+        }
     }
+
+    int white=0;
+    int blue = 0;
+    for(int i=0;i<h;i++){
+        for(int j=0;j<w;j++){
+            if(visited[i][j]!=true){
+                cnt = 0;
+                if(map[i][j]=='W'){
+                    int w_temp;
+                    w_temp = dfs(i,j,'W');
+                    white+=pow(w_temp,2);
+
+                }else if(map[i][j]=='B'){
+
+                    int b_temp;
+                    b_temp = dfs(i,j,'B');
+                    blue+=pow(b_temp,2);
+
+                }
+            }
+        }
+    }
+
+    cout << white << " " << blue << '\n';
+
+
+    
 }
