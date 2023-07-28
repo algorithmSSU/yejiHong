@@ -11,6 +11,8 @@ int dy[4]={0,0,-1,1};
 int dx[4]={-1,1,0,0};
 bool visited[1001][1001]={false,};
 
+
+bool flag = false;
 void bfs(int y,int x){
     queue<pair<int,int> > q;
     q.push(make_pair(y,x));
@@ -18,7 +20,12 @@ void bfs(int y,int x){
         int cy = q.front().first;
         int cx = q.front().second;
         q.pop();
+        
         digiter[cy][cx] = 1;
+        int m = M - 1;
+        if(cy==m){
+            flag = true;
+        }
         for(int i=0;i<4;i++){
             int ny = cy+dy[i];
             int nx = cx+dx[i];
@@ -49,10 +56,12 @@ int main(){
         }
     }
 
-    bfs(0,0);
+    // 맨위(바깥이라함) 에서 챡 (모든 열에) 물질흡수
+    for(int i=0;i<N;i++){
+        bfs(0,i);
+    }
 
     
-    bool flag = false;
     int cnt=0;
     for(int i=0;i<M;i++){
         if(digiter[N-1][i]==0){
@@ -60,15 +69,12 @@ int main(){
         }
     };
 
-    if(cnt==M){
-        cout<< "NO" << '\n';
-    }else{
+    // 바닥에 닿은물질이 하나라도 있으면 통과
+    if(flag){
         cout << "YES" << '\n';
+    }else{
+        cout << "NO" << '\n';
     }
-
-
-
-
 
 
 
