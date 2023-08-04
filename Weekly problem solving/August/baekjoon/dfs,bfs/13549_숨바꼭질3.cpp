@@ -29,6 +29,8 @@ void bfs(int now,int target){
         long long int n3 = pos*2;
 
 
+        // 조건 주의
+
         if(n3>=0 && !visited[n3] && n3<=100001){
             visited[n3]=true;
             q.push_front(make_pair(n3, t));
@@ -43,8 +45,6 @@ void bfs(int now,int target){
             q.push_back(make_pair(n2, t + 1));
         };
         
-        
-
     }
 
 }
