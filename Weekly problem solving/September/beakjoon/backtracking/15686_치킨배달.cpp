@@ -1,55 +1,68 @@
-// 구글링 구글샘
-
-
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
-
-const int MAX = 51;
 int n,m;
-vector<pair<int,int> > house;
-vector<pair<int, int> > chicken;
-bool visited[15]={false,};
-pair<int,int> combi[15];
+bool visited[15]={false};
+int map[51][51]={0,};
+vector<pair<int,int> > house, chicken,chicken_pick;
+int chickencount = 0;
 int answer = 1e9;
 
 
-// 조합으로 구해진 치킨집 거리계산 
-int solution(pair<int,int> chickens[]){
-  int answer = 1
-  int chicken_way_sum=0;
-  for(int i=0;i<m;i++){
-    for(int j=0;j<house.size();j++){
-      int dist = abs(house[i].first - chicken[j].first) + abs(house[i].second -chicken[j].second);
-      chicken_way_sum += dist;
-    }
-  };
+int Min(int a,int b){
+  if(a<b){
+    return a;
+  }
+  return b;
+}
 
-  return chicken_way_sum;
+void input(){
+  for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+      cin >> map[i][j];
+      if(map[i][j]==1){
+        house.emplace_back(make_pair(i,j));
+      }
+      if(map[i][j]==2){
+        chicken.emplace_back(make_pair(i,j));
+      }
+    }
+  }
+
+  chickencount = chicken.size();
+}
+
+int solution(){
+  int sum = 0;
+  for(int i=0;i<house.size();i++){
+    int hy = house[i].first;
+    int hx = house[i].second;
+    int compare = 1e9;
+    for(int j=0;j<chicken_pick.size();j++){
+      int cy = chicken_pick[j].first;
+      int cx = chicken_pick[j].second;
+      int dist = abs(hy-cy) + abs(hx-cx);
+      compare = Min(compare, dist);
+    }
+    sum+=compare;
+  }
+  return sum;
 }
 
 
-// 조합구하기
-void BT(int idx, int cnt){
+void BackTracking(int idx, int cnt){
   if(cnt==m){
-    for(int i=0;i<m;i++){
-      cout << combi[i].first <<"," << combi[i].second << endl;
-      
-    }
-    cout << "________________" << endl;
-
-    
-    // m개의 치킨집 치킨거리계산
-    int temp = solution(combi);
-    answer = temp < answer ? temp : answer;
+    answer = Min(answer, solution());
     return;
   }else{
-    for(int i=idx;i<chicken.size();i++){
+    for (int i = idx; i < chickencount;i++){
       if(!visited[i]){
         visited[i]=true;
-        combi[cnt]=chicken[i];
-        BT(idx+1,cnt+1);
+        chicken_pick.emplace_back(chicken[i]);
+        BackTracking(i,cnt+1);
         visited[i]=false;
+        chicken_pick.pop_back();
       }
     }
   }
@@ -57,27 +70,15 @@ void BT(int idx, int cnt){
 
 
 
-
-int map[MAX][MAX];
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(0);
+  cout.tie(0);
   cin >> n >> m;
 
-  for(int i=0;i<n;i++){
-    for(int j=0;j<n;j++){
-      cin >> map[i][j];
-      if(map[i][j]==1){//집
-        house.emplace_back(i,j);
-      }else if(map[i][j]==2){//음치킨
-        chicken.emplace_back(i,j);
+  input();
+  BackTracking(0,0);
 
-      }
-    }
-  }
-
-  BT(0,0);
   cout << answer << endl;
-
 
 }
