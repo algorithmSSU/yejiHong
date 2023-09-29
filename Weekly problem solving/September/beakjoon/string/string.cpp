@@ -29,4 +29,12 @@ int main(){
   cout << "'A'-0 :" << typeid(a).name() << endl;
   cout << "(int)'A' : " << b << endl;
   cout << "z: " << (int)'z'  << endl;
+
+  cout << isdigit('3') << endl;
+  cout << isdigit('0') << endl;
+
+  int num = 2;
+  cout << to_string(num) << endl;
+
+  
 }
