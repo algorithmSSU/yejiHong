@@ -1,66 +1,46 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <set>
+#include <map>
+#include <memory.h>
 
 using namespace std;
-int N;
+
 int arr[102];
-bool visited[102];
-vector<int> temp;
-set<int> answer;
+int answer[102];
+int idx= 0;
+bool visited[102]={false,};
+int n;
 
-bool flag = false;
-
-
-void dfs(int idx,int value){
-    if(visited[value]){
-        if(idx==value){
-            flag=true;
-            answer.insert(value);
+void dfs(int current, int start){
+    if(visited[current]){
+        if(current == start){
+            answer[idx++]=current;
         }
-        return;
-    }
-    visited[value]=true;
-    dfs(idx,arr[value]);
-    if(flag){
-        answer.insert(value);
-        answer.insert(arr[value]);
-
-    }
-
-
-    
-}
-
-
-void init(){
-    for(int i=1;i<103;i++){
-        visited[i]=false;
+    }else{
+        visited[current]=true;
+        dfs(arr[current],start);
     }
 }
+
+
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    cin >> N;
+    cin >> n;
 
-    for(int i=1;i<=N;i++){
+    for(int i=1;i<=n;i++){
         cin >> arr[i];
+    };
+
+    for(int i=1;i<=n;i++){
+        memset(visited,false,sizeof(visited));
+        dfs(i,i);
     }
 
-    for(int i=1;i<=N;i++){
-        visited[i]=true;
-        dfs(i,arr[i]);
-        init();
-        flag=false;
+    cout << idx << endl;
+    for(int i=0;i<idx;i++){
+        cout << answer[i] << endl;
     }
-
-    cout << answer.size() << '\n';
-    for(auto it : answer){
-        cout << it << '\n';
-    }
-
-
-
 }

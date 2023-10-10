@@ -11,12 +11,13 @@ int start;
 int dist[20001];
 
 void shortestPath(int cost, int now){
-  queue<pair<int,int> > q;
+  //queue<pair<int,int> > q;
+  priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int> >> q;
   q.push(make_pair(cost,now));
 
   while(!q.empty()){
-    int cost = q.front().first;
-    int cur = q.front().second;
+    int cost = q.top().first;
+    int cur = q.top().second;
     
     q.pop();
 
@@ -25,8 +26,8 @@ void shortestPath(int cost, int now){
       int next = arr[cur][i].second;
       int next_cost = arr[cur][i].first+cost;
 
-      if(dist[next] > dist[cur]+next_cost){
-        dist[next] = dist[cur]+next_cost;
+      if(dist[next] > next_cost){
+        dist[next] = next_cost;
         q.push(make_pair(next_cost,next));
       }
     }
