@@ -18,34 +18,17 @@ int main(){
     for(int i=1;i<=n;i++){
         cin >> step[i];
     }
-    dp[1]=step[1]+step[2];
+    dp[1]=step[1];
+    dp[2]=step[1]+step[2];
+    dp[3]=max(step[1]+step[3],step[1]+step[2]);
 
-    int idx=2;
-    int i=2;
-    while(i<=n){
-        if(i+2==n){
-            dp[idx++]=step[i+2];
-            break;
-        }else if(i+1==n){
-            dp[idx++]=step[i+1];
-            break;
-        }else{
-            if(step[i+1]<step[i+2]){
-                dp[idx++]=step[i+2];
-                i+=2;
-            }else{
-                dp[idx++]=step[i+1];
-                i+=1;
-            }
-        }   
+    for(int i=4;i<=n;i++){
+        dp[i]=max(dp[i-2]+step[i],dp[i-3]+step[i-1]+step[i]);
     }
 
-    int sum = 0;
-    for(int i=1;i<idx;i++){
-        sum+=dp[i];
-    }
-    cout << sum << endl;
+    cout << dp[n] << endl;
 
+    
     
 
 
