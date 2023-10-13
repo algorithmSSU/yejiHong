@@ -6,7 +6,7 @@ using namespace std;
 
 int n;
 int card[100001];
-int dp[100001];
+int dp[100001]={0,};
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -17,13 +17,9 @@ int main(){
         cin >> card[i];
     }
 
-
-    dp[0]=0;
-    dp[1]=card[1];
-
-    for(int i=2;i<=n;i++){
+    for(int i=1;i<=n;i++){
         for(int j=1;j<=i;j++){
-            dp[i] = max(dp[i],dp[i-j]+card[j]);
+            dp[i]=max(dp[i],dp[i-j]+card[j]);
         }
     }
 
