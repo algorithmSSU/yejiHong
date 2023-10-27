@@ -26,7 +26,7 @@ void bfs(int y, int x, int move){
     while(!q.empty()){
         int cy = q.front().first.first;
         int cx = q.front().first.second;
-        int cost = q.front().second.first;
+        int cost = q.front().second.first; // 움직임 횟수
         int ability = q.front().second.second; // 원숭이가 말처럼 움직일 수 있는 능력 사용 횟수
         
         q.pop();
