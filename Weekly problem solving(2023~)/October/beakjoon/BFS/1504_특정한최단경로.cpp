@@ -1,61 +1,116 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <memory.h>
+#include <string.h>
 #include <algorithm>
-#include <cstring>
-using namespace std;
-const int INF = 987654321;
-int N, E, v1, v2, res = INF;
-int sToV1, sToV2, V1ToV2, V1ToN, V2ToN;
-vector<pair<int, int>> v[801]; // v[a] = (b,c) : a에서 b까지 c의 거리로 이동 가능
-int dist[801];
 
-void dijk(int start)
-{
-	for (int i = 0; i <= N; i++) dist[i] = INF;
-	dist[start] = 0;
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
-	q.push({ 0,start }); // 현재까지 거리, 현재 위치
-	while (!q.empty()) {
-		int cur = q.top().second;
-		int curDist = q.top().first;
-		q.pop();
-		for (int i = 0; i < v[cur].size(); i++) {
-			int next = v[cur][i].first;
-			int nextDist = v[cur][i].second;
-			if (dist[next] > curDist + nextDist) {
-				dist[next] = curDist + nextDist;
-				q.push({ dist[next],next });
-			}
-		}
-	}
+using namespace std;
+
+#define INF 99999999
+#define MAX 801
+int N,E,a,b;
+vector<pair<int,int>> graph[MAX];
+int dist[MAX];
+
+void init(){
+    for(int i=0;i<MAX;i++){
+        dist[i]=INF;
+    }
 }
 
-int main()
-{
-	cin >> N >> E;
-	while (E--) {
-		int a, b, c;
-		cin >> a >> b >> c;
-		v[a].push_back({ b,c });
-		v[b].push_back({ a,c });
-	}
-	cin >> v1 >> v2;
 
-	dijk(1);
-	sToV1 = dist[v1];
-	sToV2 = dist[v2];
+void digk(int start){
+    init();
+    dist[start]=0;
 
-	dijk(v1);
-	V1ToV2 = dist[v2];
-	V1ToN = dist[N];
+    queue<pair<int,int> > q;
+    q.push(make_pair(start,0));
 
-	dijk(v2);
-	V2ToN = dist[N];
+    while(!q.empty()){
+        int cur = q.front().first;
+        int cost = q.front().second;
+
+        q.pop();
+
+        for(int i =0;i<graph[cur].size();i++){
+            int next = graph[cur][i].first;
+            int next_cost = graph[cur][i].second;
+
+            if(dist[next]>cost+next_cost){
+                dist[next] = cost+next_cost;
+                q.push(make_pair(next,next_cost+cost));
+            }
+        }
+    }
+}
 
 
-	res = min(res, sToV1 + V1ToV2 + V2ToN);
-	res = min(res, sToV2 + V1ToV2 + V1ToN);
-	if (V1ToV2 == INF || res == INF) cout << -1;
-	else cout << res;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    cin >> N >> E;
+
+    for(int i=0;i<E;i++){
+        int v1,v2,cost;
+        cin >> v1 >> v2 >> cost;
+        graph[v1].emplace_back(make_pair(v2,cost));
+        graph[v2].emplace_back(make_pair(v1,cost));
+    }
+
+    cin >> a >> b;
+
+
+    int startToa;
+    int startTob;
+    int aTob;
+    int aTon, bTon;
+    int answer=0;
+    // 1->a->N
+    // 1->b->N
+
+    digk(1);
+    startToa = dist[a];
+    startTob = dist[b];
+    // 시작지점부터 중간에 어딜 들릴것인지
+    
+
+    digk(a);
+    // a->b b->a
+    aTob = dist[b];
+    aTon = dist[N];
+
+
+    digk(b);
+    bTon = dist[N];
+    // 중간을 어디로 두고 끝으로 갈것인지
+
+    // start -> a-b -> N
+    // start -> b-a -> N
+
+    answer = min(startToa+aTob+bTon, startTob+aTob+aTon);
+    if(answer >= INF){
+        cout << -1 << endl;
+    }else{
+        cout << answer << endl;
+    }
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+    
 }
