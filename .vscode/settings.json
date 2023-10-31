@@ -15,6 +15,9 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "__locale": "cpp",
+        "ios": "cpp",
+        "algorithm": "cpp"
     }
 }
