@@ -21,8 +21,7 @@ int main(){
         }else if(a==b){
             answer.emplace_back('=');
         }
-
-
+        
 		
 	}
 
