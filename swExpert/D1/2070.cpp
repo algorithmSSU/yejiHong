@@ -20,16 +20,14 @@ int main(){
             answer.emplace_back('<');
         }else if(a==b){
             answer.emplace_back('=');
-        }
-        
-		
+        }	
 	}
 
     int tag = 1;
     for(auto it : answer){
         cout << "#" << tag++ << " " << it << '\n';
     }
-	return 0;//정상종료시 반드시 0을 리턴해야합니다.
+	return 0;//정상종료시 반드시 0을 리턴해야한다.
 
 
 
