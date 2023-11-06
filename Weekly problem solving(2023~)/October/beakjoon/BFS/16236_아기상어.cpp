@@ -14,18 +14,19 @@ int dx[4]={0,-1,1,0};
 int map[MAX][MAX];
 int visited[MAX][MAX]={0,};
 
-// 상어의 좌표
+// 상어의 좌표(위치)
 pair<int,int> shark;
+
 // 상어의 크기
 int sh_size= 2; // 처음에는 2 
-
-
 
 int die_fish = 0; // 잡아먹은 물고기 갯수 카운팅
 int total_time = 0; // 총 걸린 시간
 bool eat = false; // 물고기 먹었는지 판별
 bool stop = false; // 물고기 더 이상 먹은거 없는 지 판별
 
+
+// 입력
 void input(){
     cin >> N;
 
@@ -43,6 +44,8 @@ void input(){
     }
 }
 
+
+// 초기화 
 void init(){
     for(int i=0;i<MAX;i++){
         for(int j=0;j<MAX;j++){
@@ -51,9 +54,12 @@ void init(){
     }
 }
 
+
+
+// 탐색
 void bfs(){
     queue<pair<int,pair<int,int>>>q;
-    q.push(make_pair(0,make_pair(shark.first,shark.second)));
+    q.push(make_pair(0,make_pair(shark.first,shark.second)));// 상어의 위치를 전역으로 선언해서 바로 사용가능
     visited[shark.first][shark.second]= true;
     int one = 0; // 한마리 먹는데 걸린 시간
 
@@ -97,6 +103,7 @@ void bfs(){
 
 
 }
+
 int main(){
 
     input();
