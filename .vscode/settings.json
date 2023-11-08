@@ -19,6 +19,9 @@
         "__locale": "cpp",
         "ios": "cpp",
         "algorithm": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "bitset": "cpp"
     }
 }
