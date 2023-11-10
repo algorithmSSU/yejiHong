@@ -4,54 +4,53 @@
 #include <stack>
 using namespace std;
 
-int main(){
+int solution(vector<int> ingredient){
 
-    vector<int> gredient = {2, 1, 1, 2, 3, 1, 2, 3, 1};
-    vector<int> patty = {1,2,3,1};
-    int gs = gredient.size();
-    int ps = patty.size();
+    string patty = "1231";
+    string g;
 
     int answer =0;
+    int gi =0;
+    int pi =0;
 
-    string G;
-    string P;
+    for(int i=0;i<ingredient.size();i++){
+        g+=ingredient[i]+'0';
+        // 맨 뒷부분과 같다면
 
-    for(int i=0;i<gredient.size();i++){
-        G+='0'+gredient[i];
-    }
-    for(int j=0;j<patty.size();j++){
-        P+='0'+patty[j];
-    }
-
-
-    int cnt = 0;
-    int pi = 0;
-    int cursor = 0;
-
-
-    while(cursor<=gs){
-        
-        while(cursor<gs && G[cursor++] == P[pi++]){
-            cout << cursor << endl;
-            // cursor++;
-            // pi++;
-            cnt++;
-        };
-        
-        if(cnt==ps){
-            answer++;
-            //cout << "cursor" << cursor << endl;
-            G.erase(cursor-4,4);
-            cursor = cursor-4 < 0 ? 0 : cursor-4;
-            pi=0;
-            cnt=0;
+        cout << g << endl;
+        if(g[i] ==patty[patty.length()-1]){
+            // patty 랑 확인할 수 있을 만큼 크기가 더 크다면
+            if(g.size() >= patty.size()){
+                gi = i;
+                pi = patty.size()-1;
+                int same = 0;
+                for(int k=0;k<patty.size();k++){
+                    if(g[gi] == patty[pi])
+                    gi--;
+                    pi--;
+                    same++;
+                }
+                if(same == patty.size()){
+                    for(int d=0;d<same;d++){
+                        g.pop_back();
+                    }
+                    answer++;
+                }
+            }
         }
-        cursor++;
-        pi=0;
-        cnt=0;
     }
 
-    cout << G << endl;
+    cout << g << endl;
+    return answer;
+
+}
+
+
+int main(){
+    vector<int> ig = {2, 1, 1, 2, 3, 1, 2, 3, 1};
+    int answer = solution(ig);
 
     cout << answer << endl;
+
+    
 }
