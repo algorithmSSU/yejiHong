@@ -17,6 +17,11 @@ int main(){
 
     sort(times.begin(),times.end());
 
+    // for(auto it : times){
+    //     cout << it.first << " " << it.second << endl;
+    // }
+
+
     int next = times.front().first;
 
 
