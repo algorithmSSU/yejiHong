@@ -11,8 +11,6 @@ int main(){
     cout.tie(0);
     vector<long long> v;
     vector<long long> v2;
-    vector<long long> v3;
-
     cin >> N;
     for(int i=0;i<N;i++){
         long long num;
@@ -29,7 +27,8 @@ int main(){
         }
     }  
 
-    // ??????
+    // 값이 큰 v[i]부터 확인하기 때문에 발견을 하면 바로 출력하고 종료
+    // v 배열은 정렬을 따로 안해도 되지만, 정렬을 하면 발견하자마자 (바로큰값으로) 종료할 수있음
     sort(v2.begin(),v2.end());// i+j 
     for(int i = N-1; i>0; i--){
         for(int j=0;j<i;j++){
